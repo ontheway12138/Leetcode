@@ -1,5 +1,7 @@
 package Leetcode_128_LongestConsecutiveSequence;
 
+import java.util.HashSet;
+
 /*
 	给定一个未排序的整数数组，找出最长连续序列的长度。
 	
@@ -20,9 +22,27 @@ public class LongestConsecutiveSequence {
 		// TODO Auto-generated method stub
 
 	}
-
+	//128. 最长连续序列
 	public int longestConsecutive(int[] nums) {
-		return 0;
+		HashSet<Integer> set = new HashSet<>();
+		for(int num:nums) {
+			set.add(num);
+		}
+		int res = 0;
+		for(int num:nums) {
+			if(set.contains(num-1)) {
+				continue;
+			}else {
+				int curnums = num;
+				int length = 1;
+				while(set.contains(curnums+1)) {
+					length++;
+					curnums++;
+				}
+				res = Math.max(res, length);
+			}
+		}
+		return res;
 	}
 
 }
